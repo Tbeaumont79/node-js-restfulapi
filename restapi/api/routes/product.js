@@ -3,9 +3,9 @@ const Product = require('../modele/product')
 const express = require('express')
 const checkAuth = require('../middleware/check-auth')
 const routeur = express.Router()
+const jwt = require('jsonwebtoken')
 
 routeur.use(express.json())
-
 routeur.post('/add', checkAuth, (req, res, next) => {
     let products = new Product({
         _id: new mongoose.Types.ObjectId,
@@ -13,21 +13,25 @@ routeur.post('/add', checkAuth, (req, res, next) => {
         price: req.body.price,
         quantity: req.body.quantity
     })
-
+    
     products.save()
         .then((result) => {
-
-            if (result) {
-                console.log("the product is added ! ", result)
-                return (res.status(200))
-            }
-        })
-        .catch(err => { 
-            console.log("je catch !! ", err)
-            return (res.status(400))
-        })
-        next();
+    
+        if (result) {
+            console.log("the product is added ! ", result)
+        return (res.status(200))
+        }
+    })
+    .catch(err => { 
+        console.log("je catch !! ", err)
+        return (res.status(400))
+    })
+    res.status(200).json({
+        message: "product succefully added ",
+    })
+    next();
 })
+
 
 routeur.delete('/:productId', (req, res, next) => {
     Product.delete({ _id: req.params.productId })

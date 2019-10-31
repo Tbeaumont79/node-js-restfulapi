@@ -9,14 +9,12 @@ const productSchema = new mongoose.Schema({
         index:true,
     },
     price:{
-        type:String,
+        type: Number,
         required:true,
-        unique:true,
         index:true,
     },
     quantity:{
         type:Number,
-        required:true,
         index:true,
     },
 });
