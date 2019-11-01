@@ -13,9 +13,13 @@ mongoose.connect('mongodb://localhost:27017/Ecom', {
     useCreateIndex: true,
 }, (err) => {
     if (!err) {
-        console.log('MongoDB Connection Succeeded.')
+        res.status(200).json({
+            message: "database connected " + result
+        })
     } else {
-        console.log('Error in DB connection: ' + err)
+        res.status(401).json({
+            message: "database not connected" + err
+        })
     }
 });
 app.use((req, res, next) => {
@@ -27,8 +31,10 @@ app.use((req, res, next) => {
     next()   
 })
 
-
+// products/add to add a product
 app.use('/products', product)
+// user/login to login
+// user/signup to signup
 app.use('/user', user)
 
 app.get('/', (req, res) => res.send('Hello World!'))

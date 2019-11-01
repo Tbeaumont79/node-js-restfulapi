@@ -22,8 +22,12 @@ routeur.post('/signup', (req, res, next) => {
                 password: hash
             })
             user.save()
-            .then((result) => console.log("succesfully registered  ", result))
-            .catch((err) => {console.log("voila l'erreur " + err)})
+            .then((result) => res.status(200).json({
+                message:"succesfully registered  " + result
+            }))
+            .catch((err) => {res.status(401).json({
+                message: "voila l'erreur " + err
+            })})
         }
     })
     next()
