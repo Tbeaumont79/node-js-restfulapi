@@ -4,10 +4,10 @@ const User = require('../modele/user')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-
+const alertRegister = require('../middleware/register_sound')
 routeur.use(express.json())
 
-routeur.post('/signup', (req, res, next) => {
+routeur.post('/signup',alertRegister, (req, res, next) => {
     
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
@@ -19,15 +19,14 @@ routeur.post('/signup', (req, res, next) => {
                 _id: new mongoose.Types.ObjectId,
                 name: req.body.name,
                 email: req.body.email,
-                password: hash
+                password: hash,
+                orderAdress: req.body.orderAdress,
             })
             user.save()
-            .then((result) => res.status(200).json({
-                message:"succesfully registered  " + result
-            }))
-            .catch((err) => {res.status(401).json({
-                message: "voila l'erreur " + err
-            })})
+            .then((result) => { 
+                console.log("user succefully registered ", result)
+            })
+            .catch((e) => console.log(e))
         }
     })
     next()
@@ -63,6 +62,20 @@ routeur.post('/login', (req, res, next) => {
             }
         })
     })
+})
+
+//envoyer un mail a l'utlisateur pour lui signaler qu'il est ban
+routeur.put('/:id', (req, res, next) => {
+    const user = courses.find(c => c.id === parseInt(req.params.id))
+    if (!user)
+        return res.status(400).send("cannot find user of :" + user)
+    else {
+        user.access = req.body.revoke
+        res.status(200).json({
+            message: "user " + user + " is now banned from the website ! "
+        })
+        next()
+    }
 })
 
 routeur.delete("/:userId", (req, res, next) => {

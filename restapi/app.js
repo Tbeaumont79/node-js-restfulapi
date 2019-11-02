@@ -11,17 +11,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/Ecom', {
     useNewUrlParser: true,
     useCreateIndex: true,
-}, (err) => {
-    if (!err) {
-        res.status(200).json({
-            message: "database connected " + result
-        })
-    } else {
-        res.status(401).json({
-            message: "database not connected" + err
-        })
-    }
+    useUnifiedTopology: true
 });
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
     res.header(

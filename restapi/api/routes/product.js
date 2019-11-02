@@ -3,7 +3,6 @@ const Product = require('../modele/product')
 const express = require('express')
 const checkAuth = require('../middleware/check-auth')
 const routeur = express.Router()
-const jwt = require('jsonwebtoken')
 
 routeur.use(express.json())
 routeur.post('/add', checkAuth, (req, res, next) => {
@@ -11,7 +10,8 @@ routeur.post('/add', checkAuth, (req, res, next) => {
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
         price: req.body.price,
-        quantity: req.body.quantity
+        quantity: req.body.quantity,
+        category: req.body.category
     })
     
     products.save()
@@ -39,13 +39,14 @@ routeur.delete('/:productId', (req, res, next) => {
         .then(result => {
             console.log("product delete ! ");
             res.status(200).json({
-                message:"User has been deleted !"
+                message:"User has been deleted !" + result
             })
+            next()
         })
         .catch(err => {
             console.log("error when deleting an user  !")
             res.status(500).json({
-                message: "probleme user not deleted ! "
+                message: "probleme user not deleted ! " + err
             })
         })
 })

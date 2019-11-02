@@ -20,6 +20,15 @@ const userSchema = new mongoose.Schema({
         required:true,
         index:true,
     },
+    orderAdress: {
+        type: String,
+        required: true,
+        index: true,
+    },
+    access: {
+        type: Number,
+        default: 1
+    }
 }); 
 
 //Export the model
