@@ -33,6 +33,7 @@ routeur.post('/add', checkAuth, (req, res, next) => {
 })
 
 
+
 routeur.delete('/:productId', (req, res, next) => {
     Product.delete({ _id: req.params.productId })
         .exec()
