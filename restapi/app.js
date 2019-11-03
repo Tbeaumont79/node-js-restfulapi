@@ -23,10 +23,7 @@ app.use((req, res, next) => {
     next()   
 })
 
-// products/add to add a product
 app.use('/products', product)
-// user/login to login
-// user/signup to signup
 app.use('/user', user)
 
 app.get('/', (req, res) => res.send('Hello World!'))

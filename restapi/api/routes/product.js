@@ -32,7 +32,42 @@ routeur.post('/add', checkAuth, (req, res, next) => {
     next();
 })
 
+routeur.put('/:productId', (req, res, next) => {
+    const newProduct = {
+        name: req.body.name,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        category: req.body.category
+    }
+    User.updateOne({_id: req.params.productId }, newProduct, (err) => {
+        if (err) {
+            res.status(400).json({
+                message: "there is an error " + err
+            })
+        } else {
+            res.status(200).json({
+                message: "product sucefully change ! "
+            })
+            next();
+        }
+    })
+})
 
+routeur.get('/all', (req,res,next) => {
+    Product.find({}, (err, result) => {
+        if (err) {
+            res.status(400).json({
+                message: "cannot get products"
+            })
+        }
+        if (result) {
+            res.status(200).json({
+                message: "all products : " + result
+            })
+            next()
+        }
+    })
+})
 
 routeur.delete('/:productId', (req, res, next) => {
     Product.delete({ _id: req.params.productId })
