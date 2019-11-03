@@ -19,10 +19,10 @@ routeur.post('/signup',alertRegister, (req, res, next) => {
         } else {
              let user = new User({
                 _id: new mongoose.Types.ObjectId,
-                name: req.body.name,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 email: req.body.email,
                 password: hash,
-                orderAdress: req.body.orderAdress,
             })
             user.save()
             .then((result) => {
