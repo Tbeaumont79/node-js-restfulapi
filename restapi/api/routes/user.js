@@ -81,9 +81,7 @@ routeur.get('/all', (req, res, next) => {
             })
         }
         else {
-            res.status(200).json({
-                message : "user printed : "+ result
-            })
+            res.send(result)
             next()
         }
     })
