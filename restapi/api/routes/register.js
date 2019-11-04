@@ -8,7 +8,11 @@ const jwt = require('jsonwebtoken')
 routeur.use(express.json())
 
 routeur.post('/', (req, res, next) => {
-    
+    console.log(req.body.password)
+    console.log(req.body.firstName)
+    console.log(req.body.lastName)
+    console.log(req.body.email)
+    console.log(req.body.address)
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
             res.status(505)
