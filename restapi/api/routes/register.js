@@ -15,7 +15,7 @@ routeur.post('/', (req, res, next) => {
     console.log(req.body.address)
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
-            res.status(505)
+            res.status(500)
             console.log("il y a une erreur ::: ", err)
         } else {
              let user = new User({

@@ -32,5 +32,5 @@ app.use('/login', login)
 app.use('/products', product)
 app.use('/user', user)
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('/login to login /signup to signup'))
 app.listen(port, () => console.log('Example app listening on port 3000!'))
