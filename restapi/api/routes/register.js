@@ -11,9 +11,8 @@ routeur.post('/', (req, res, next) => {
     
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
-            res.status(505).json({
-                message:"error register "
-            })
+            res.status(505)
+            console.log("il y a une erreur ::: ", err)
         } else {
              let user = new User({
                 _id: new mongoose.Types.ObjectId,
