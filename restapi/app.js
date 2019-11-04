@@ -6,12 +6,13 @@ const product = require('./api/routes/product')
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 
-
 // Connect MongoDB at default port 27017.
-mongoose.connect('mongodb:/176.151.18.182:27017/Ecom', {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
+
+mongoose.connect('mongodb://127.0.0.1:27017/test');
+
+//testing connectivity
+mongoose.connection.once('connected', function() {
+	console.log("Database connected successfully")
 });
 
 app.use((req, res, next) => {
