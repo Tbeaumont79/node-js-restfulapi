@@ -4,12 +4,11 @@ const User = require('../modele/user')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-const alertRegister = require('../middleware/register_sound')
 const checkAuth = require('../middleware/check-auth')
 
 routeur.use(express.json())
 
-routeur.post('/signup',alertRegister, (req, res, next) => {
+routeur.post('/signup', (req, res, next) => {
     
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
