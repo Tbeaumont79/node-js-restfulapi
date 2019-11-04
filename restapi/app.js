@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise;
 
 
 // Connect MongoDB at default port 27017.
-mongoose.connect('mongodb://192.168.1.23:27017/Ecom', {
+mongoose.connect('mongodb:/176.151.18.182:27017/Ecom', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
