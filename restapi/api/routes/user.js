@@ -13,7 +13,6 @@ routeur.post('/signup',alertRegister, (req, res, next) => {
     
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
-            console.log("these is the error %s", err)
             return res.status(500).json({
                 error:"le hash n'a pas marche !"
             })
@@ -33,7 +32,7 @@ routeur.post('/signup',alertRegister, (req, res, next) => {
                 })
                 next()                
             })
-            .catch((e) => console.log(e))
+            .catch((e) => console.log("there is a probleme check this out ->  ",e))
         }
     })
 })
