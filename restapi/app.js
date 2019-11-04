@@ -4,6 +4,9 @@ const port = 3000
 const user = require('./api/routes/user')
 const product = require('./api/routes/product')
 const mongoose = require('mongoose')
+const signup = require('./api/routes/register')
+const login = require('./api/routes/login')
+
 mongoose.Promise = global.Promise;
 
 // Connect MongoDB at default port 27017.
@@ -24,6 +27,8 @@ app.use((req, res, next) => {
     next()   
 })
 
+app.use('/signup', signup)
+app.use('/login', login)
 app.use('/products', product)
 app.use('/user', user)
 
