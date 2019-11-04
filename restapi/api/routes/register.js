@@ -11,8 +11,8 @@ routeur.post('/', (req, res, next) => {
     
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
-            return res.status(500).json({
-                error:"le hash n'a pas marche !"
+            res.status(505).json({
+                message:"error register "
             })
         } else {
              let user = new User({
